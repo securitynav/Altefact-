@@ -139,6 +139,10 @@ fun AuthScreen(onLoginSuccess: () -> Unit) {
                                                 isLoading = false
                                                 onLoginSuccess()
                                             }
+                                            .addOnFailureListener { e ->
+                                                isLoading = false
+                                                Toast.makeText(context, "Error guardando perfil: ${e.message}", Toast.LENGTH_LONG).show()
+                                            }
                                     }
                                 } else {
                                     isLoading = false
