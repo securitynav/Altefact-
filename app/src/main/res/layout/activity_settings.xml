@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/basic_configuration"
+            android:textColor="@color/neon_cyan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchNotifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/realtime_notifications"
+            android:textColor="@color/text_primary" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cyberpunk OLED Theme"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/background_scan_frequency"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="16dp" />
+
+        <Spinner
+            android:id="@+id/spinnerFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_secondary"
+            android:layout_marginVertical="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/advanced_configuration"
+            android:textColor="@color/neon_purple"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnRotateKeys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rotate_keys"
+            android:backgroundTint="@color/surface_dark"
+            android:textColor="@color/neon_purple" />
+
+        <Button
+            android:id="@+id/btnVpnExclusions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vpn_exclusions"
+            android:backgroundTint="@color/surface_dark"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/packet_inspection_verbosity"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="16dp" />
+
+        <Spinner
+            android:id="@+id/spinnerVerbosity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchAntiTamper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/anti_tampering"
+            android:textColor="@color/error"
+            android:layout_marginTop="16dp" />
+            
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_out"
+            android:backgroundTint="@color/error"
+            android:textColor="@color/black"
+            android:layout_marginTop="32dp" />
+
+    </LinearLayout>
+</ScrollView>

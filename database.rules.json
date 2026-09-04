@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "live_status": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "ota_updates": {
+      ".read": true,
+      ".write": false
+    },
+    "subscriptions": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": false
+      }
+    }
+  }
+}

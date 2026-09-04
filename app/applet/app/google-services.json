@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "289847280584",
+    "project_id": "securitynav-6e414",
+    "storage_bucket": "securitynav-6e414.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289847280584:android:f6bd7d4bbcfd5b6e12b6fd",
+        "android_client_info": {
+          "package_name": "com.securitynav.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIKw6dO-zHbKyMEn4WLXNSu50K9Y64SnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

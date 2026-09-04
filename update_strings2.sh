@@ -1,0 +1,4 @@
+#!/bin/bash
+sed -i '/<\/resources>/i \    <string name="nav_notifications">Notifications</string>\n    <string name="nav_support">Contact Support</string>\n    <string name="alert_penetration">Penetration Attempt Detected!</string>\n    <string name="alert_data_leak">Data Leak Prevented!</string>\n    <string name="perm_background">To maintain 24/7 protection, please disable battery optimizations.</string>' ./app/src/main/res/values/strings.xml
+
+sed -i '/<\/resources>/i \    <string name="nav_notifications">Notificaciones</string>\n    <string name="nav_support">Contactar Soporte</string>\n    <string name="alert_penetration">¡Intento de Penetración Detectado!</string>\n    <string name="alert_data_leak">¡Fuga de Datos Prevenida!</string>\n    <string name="perm_background">Para mantener protección 24/7, desactiva la optimización de batería.</string>' ./app/src/main/res/values-es/strings.xml

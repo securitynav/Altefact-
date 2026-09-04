@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SecurityNav</string>
+    <string name="main_title">SECURITY NAV</string>
+
+    <!-- Register Activity -->
+    <string name="create_account">Crear Cuenta</string>
+    <string name="full_name">Nombre Completo</string>
+    <string name="email_address">Correo Electrónico</string>
+    <string name="secure_password">Contraseña Segura</string>
+    <string name="promo_code">Código de Promoción / Referido</string>
+    <string name="apply">Aplicar</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="or">o</string>
+    <string name="sign_in_google">Continuar con Google</string>
+
+    <string name="promo_verifying">Verificando...</string>
+    <string name="promo_success">Éxito: %1$s (-%2$s%%)</string>
+    <string name="promo_invalid">Código Inválido: %1$s</string>
+    <string name="promo_server_error">Error de servidor: No se pudo validar el código</string>
+    <string name="promo_mock_success">¡Promoción aplicada con éxito! (Simulado)</string>
+
+    <!-- Settings Activity -->
+    <string name="basic_configuration">Configuración Básica</string>
+    <string name="realtime_notifications">Notificaciones de Seguridad en Tiempo Real</string>
+    <string name="app_theme">Tema de la App</string>
+    <string name="app_language">Idioma de la App</string>
+    <string name="background_scan_frequency">Frecuencia de Escaneo en Segundo Plano</string>
+    <string name="advanced_configuration">Configuración Avanzada</string>
+    <string name="rotate_keys">Rotar Llaves de SQLCipher</string>
+    <string name="vpn_exclusions">Exclusiones de VPN (Apps)</string>
+    <string name="packet_inspection_verbosity">Nivel de Inspección de Paquetes</string>
+    <string name="anti_tampering">Antimanipulación / Comprobación Root</string>
+    <string name="sign_out">Cerrar Sesión</string>
+
+    <string-array name="frequency_options">
+        <item>Cada 15 min</item>
+        <item>Cada hora</item>
+        <item>Diariamente</item>
+    </string-array>
+    
+    <string-array name="verbosity_options">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto (Paquete completo)</item>
+    </string-array>
+    
+    <string-array name="theme_options">
+        <item>Predeterminado del sistema</item>
+        <item>Modo Claro</item>
+        <item>Modo Oscuro</item>
+    </string-array>
+
+    <string-array name="language_options">
+        <item>Predeterminado del sistema</item>
+        <item>English</item>
+        <item>Español</item>
+    </string-array>
+
+    <!-- Navigation / Dashboard -->
+    <string name="nav_hub">Centro</string>
+    <string name="nav_analytics">Analítica</string>
+    <string name="nav_vpn">VPN</string>
+    <string name="nav_guard">Guardia</string>
+    <string name="nav_vault">Bóveda</string>
+
+    <string name="sys_status_secure">Estado de Sistema: SEGURO</string>
+    <string name="bandwidth">Ancho de banda: --</string>
+    <string name="vpn_private_local">VPN Local Privada</string>
+    <string name="vpn_status_disconnected">Estado VPN: DESCONECTADO</string>
+    <string name="connect_vpn">Conectar VPN</string>
+
+    <string name="accessibility_guard">Guardia de Accesibilidad</string>
+    <string name="accessibility_guard_desc">Monitorea ventanas emergentes y cambios de pantalla para evitar accesos no autorizados y manipulación.</string>
+    <string name="enable_in_settings">Habilitar en Configuración</string>
+
+    <string name="key_vault">Bóveda de Llaves (SQLCipher)</string>
+    <string name="key_vault_desc">Almacenamiento altamente cifrado para llaves API y eventos de seguridad sensibles usando SQLCipher AES de 256 bits.</string>
+    <string name="unlock_vault">Desbloquear Bóveda</string>
+    
+    <string name="real_time_traffic">Tráfico de Red en Tiempo Real</string>
+    <string name="bandwidth_format">Ancho de banda: %1$.1f MB/s DL | %2$.1f MB/s UL</string>
+    <string name="vuln_dashboard">Tendencias de Vulnerabilidad</string>
+    <string name="vuln_dashboard_desc">Visualización de ocurrencias de vulnerabilidades comunes a lo largo del tiempo.</string>
+
+    <string name="tuner_network">SINTONIZADOR DE RED Y ANCHO DE BANDA</string>
+    <string name="nav_notifications">Notificaciones</string>
+    <string name="nav_support">Contactar Soporte</string>
+    <string name="alert_penetration">¡Intento de Penetración Detectado!</string>
+    <string name="alert_data_leak">¡Fuga de Datos Prevenida!</string>
+    <string name="perm_background">Para mantener protección 24/7, desactiva la optimización de batería.</string>
+
+    <!-- Control de Encendido del Sistema -->
+    <string name="sys_sub_secure">Escudo en tiempo real 24/7 activo</string>
+    <string name="power_turn_on">Encender</string>
+    <string name="power_pause">Pausar</string>
+    <string name="power_turn_off">Apagar</string>
+
+    <!-- Almacén de Apps Protegidas -->
+    <string name="protected_apps_warehouse">Almacén de Apps Protegidas</string>
+    <string name="protected_apps_desc">Aplicaciones blindadas contra fugas e intrusiones</string>
+    <string name="badge_protected">BLINDADA</string>
+    <string name="badge_unprotected">SIN PROTECCIÓN</string>
+    <string name="loading_apps">Escaneando aplicaciones instaladas...</string>
+    <string name="protect_all">Proteger Todo</string>
+    <string name="unprotect_all">Desproteger Todo</string>
+    <string name="search_apps_hint">Buscar aplicación...</string>
+    <string name="no_apps_found">No se encontraron aplicaciones coincidentes</string>
+    <string name="protected_summary_format">%1$d de %2$d aplicaciones protegidas en el almacén</string>
+
+    <!-- Sintonizador / Tuner por Niveles -->
+    <string name="tuner_title">Sintonizador del Sistema (Tuner)</string>
+    <string name="tuner_header_desc">Ajuste de MTU, búfer de socket, DPI y criptografía hardware</string>
+    <string name="tuner_tier_basic">Niveles Básico, Avanzado y Pro</string>
+    <string name="tier_basic">Básico</string>
+    <string name="tier_advanced">Avanzado</string>
+    <string name="tier_pro">Pro</string>
+    <string name="apply_tuner_config">Aplicar Configuración de Perfil</string>
+
+    <!-- Bóveda y Cifrado -->
+    <string name="encryption_vault_title">Cifrado Hardware y Bóveda</string>
+    <string name="encryption_status_desc">Bóveda Cifrada AES-256 GCM Activa</string>
+</resources>

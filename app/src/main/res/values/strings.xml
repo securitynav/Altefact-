@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SecurityNav</string>
+    <!-- Main screen -->
+    <string name="main_title">SECURITY NAV</string>
+    <string name="action_start_vpn">Iniciar VPN</string>
+    <string name="action_stop_vpn">Detener VPN</string>
+    <string name="action_diagnostics">Diagnósticos</string>
+    <string name="action_about">Acerca de</string>
+    <string name="card_heuristics">Análisis Heurístico y Red Móvil</string>
+    <string name="card_interface_protection">Protección de Interfaz y Permisos</string>
+    <string name="card_vpn_inspection">VPN Local e Inspección de Paquetes por App</string>
+    <string name="btn_view_charts">ABRIR GRÁFICAS DE TRÁFICO EN TIEMPO REAL</string>
+    
+    <!-- Navigation -->
+    <string name="nav_hub">Panel Central</string>
+    <string name="nav_analytics">Análisis de Red</string>
+    <string name="nav_vpn">Túnel VPN</string>
+    <string name="nav_guard">Protección Activa</string>
+    <string name="nav_vault">Bóveda Cifrada</string>
+    <string name="encryption_vault_title">Bóveda de Cifrado</string>
+    <string name="nav_notifications">Alertas (0)</string>
+    <string name="nav_support">Soporte</string>
+    
+    <!-- Diagnostics -->
+    <string name="diagnostics_title">Diagnósticos de Red</string>
+    <string name="about_title">Acerca de SecurityNav</string>
+    <string name="about_message">SecurityNav v1.0\nProtección local ligera\nContacto: soporte@securitynav.local</string>
+    
+    <!-- Protected Apps -->
+    <string name="protected_apps_warehouse">Almacén Blindado</string>
+    <string name="protected_apps_desc">Selecciona las aplicaciones que deseas proteger. Se priorizará su tráfico y se bloquearán accesos de terceros.</string>
+    <string name="search_apps_hint">Buscar aplicación...</string>
+    <string name="protect_all">Proteger Todas</string>
+    <string name="unprotect_all">Desproteger Todas</string>
+    <string name="no_apps_found">No se encontraron aplicaciones</string>
+    <string name="protected_summary_format">%1$d de %2$d aplicaciones protegidas</string>
+    <string name="badge_protected">BLINDADA</string>
+    <string name="badge_unprotected">SIN PROTECCIÓN</string>
+    
+    <!-- Tuner -->
+    <string name="tuner_title">Sintonizador de Red</string>
+    <string name="tuner_header_desc">Ajusta los parámetros de conexión y cifrado para optimizar la seguridad, latencia o batería.</string>
+    <string name="tier_basic">Básico</string>
+    <string name="tier_advanced">Avanzado</string>
+    <string name="tier_pro">PRO</string>
+    <string name="apply_tuner_config">Aplicar Configuración</string>
+    
+    <!-- Additional -->
+    <string name="sys_status_secure">Sistema Seguro y Activo</string>
+    <string name="bandwidth">Descarga: 0 MB/s | Subida: 0 MB/s</string>
+    <string name="bandwidth_format">Descarga: %1$.1f MB/s | Subida: %2$.1f MB/s</string>
+    <string name="real_time_traffic">Tráfico en Tiempo Real</string>
+    <string name="advanced_configuration">Configuración Avanzada</string>
+    <string name="background_scan_frequency">Background Scan Frequency</string>
+    <string name="basic_configuration">Basic Configuration</string>
+    <string name="connect_vpn">Connect Vpn</string>
+    <string name="create_account">Create Account</string>
+    <string name="email_address">Email Address</string>
+    <string name="enable_in_settings">Enable In Settings</string>
+    <string name="encryption_status_desc">Encryption Status Desc</string>
+    <string name="full_name">Full Name</string>
+    <string name="key_vault">Key Vault</string>
+    <string name="key_vault_desc">Key Vault Desc</string>
+    <string name="loading_apps">Loading Apps</string>
+    <string name="or">Or</string>
+    <string name="packet_inspection_verbosity">Packet Inspection Verbosity</string>
+    <string name="perm_background">Perm Background</string>
+    <string name="power_pause">Power Pause</string>
+    <string name="power_turn_off">Power Turn Off</string>
+    <string name="power_turn_on">Power Turn On</string>
+    <string name="promo_code">Promo Code</string>
+    <string name="promo_invalid">Promo Invalid</string>
+    <string name="promo_mock_success">Promo Mock Success</string>
+    <string name="promo_server_error">Promo Server Error</string>
+    <string name="promo_success">Promo Success</string>
+    <string name="promo_verifying">Promo Verifying</string>
+    <string name="realtime_notifications">Realtime Notifications</string>
+    <string name="rotate_keys">Rotate Keys</string>
+    <string name="secure_password">Secure Password</string>
+    <string name="sign_in_google">Sign In Google</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sys_sub_secure">Sys Sub Secure</string>
+    <string name="tuner_network">Tuner Network</string>
+    <string name="tuner_tier_basic">Tuner Tier Basic</string>
+    <string name="unlock_vault">Unlock Vault</string>
+    <string name="vpn_exclusions">Vpn Exclusions</string>
+    <string name="vpn_private_local">Vpn Private Local</string>
+    <string name="vpn_status_disconnected">Vpn Status Disconnected</string>
+    <string name="vuln_dashboard">Vuln Dashboard</string>
+    <string name="vuln_dashboard_desc">Vuln Dashboard Desc</string>
+    <string name="accessibility_guard">Accessibility Guard</string>
+    <string name="accessibility_guard_desc">Accessibility Guard Desc</string>
+    <string name="alert_penetration">Alert Penetration</string>
+    <string name="alert_data_leak">Alert Data Leak</string>
+    <string name="anti_tampering">Anti Tampering</string>
+    <string name="app_theme">App Theme</string>
+    <string name="app_language">App Language</string>
+
+    <string-array name="frequency_options">
+        <item>1 hour</item>
+        <item>24 hours</item>
+    </string-array>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Spanish</item>
+    </string-array>
+    <string-array name="theme_options">
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="verbosity_options">
+        <item>Low</item>
+        <item>High</item>
+    </string-array>
+    <string name="apply">Apply</string>
+</resources>

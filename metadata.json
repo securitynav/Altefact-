@@ -1,0 +1,6 @@
+{
+  "name": "SecurityNav",
+  "description": "Cybersecurity and network protection application featuring power controls, protected apps vault, tiered network tuner (Basic, Advanced, Pro), and hardware-backed SQLCipher AES-256 encryption.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

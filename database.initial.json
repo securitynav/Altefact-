@@ -1,0 +1,10 @@
+{
+  "ota_updates": {
+    "latest_version": 2,
+    "version_name": "2.0.0",
+    "apk_url": "https://securitynav-service.onrender.com/downloads/securitynav-v2.0.0.apk",
+    "changelog": "Inicialización OTA Remota"
+  },
+  "subscriptions": {},
+  "live_status": {}
+}
