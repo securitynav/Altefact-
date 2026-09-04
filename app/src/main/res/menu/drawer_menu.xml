@@ -20,7 +20,7 @@
         <item
             android:id="@+id/nav_guard"
             android:icon="@android:drawable/ic_menu_view"
-            android:title="@string/nav_guard" />
+            android:title="Escáner Antivirus" />
         <item
             android:id="@+id/nav_vault"
             android:icon="@android:drawable/ic_menu_manage"
