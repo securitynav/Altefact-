@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+with open('app/src/main/res/menu/drawer_menu.xml', 'r') as f:
+    content = f.read()
+
+# The content has two nav_logout items:
+# one inside a <menu> inside an <item>, and one outside.
+# Let's cleanly rewrite the drawer_menu.xml
+new_xml = """<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
@@ -45,3 +51,7 @@
         </menu>
     </item>
 </menu>
+"""
+
+with open('app/src/main/res/menu/drawer_menu.xml', 'w') as f:
+    f.write(new_xml)
