@@ -1,0 +1,31 @@
+with open('app/src/main/res/values/colors.xml', 'w') as f:
+    f.write("""<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#0A131F</color>
+    <color name="surface_dark">#16202D</color>
+    <color name="neon_cyan">#00F0FF</color>
+    <color name="neon_purple">#B026FF</color>
+    <color name="neon_green">#39FF14</color>
+    <color name="neon_red">#FF0055</color>
+    <color name="neon_yellow">#FFD700</color>
+    
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8B9BB4</color>
+    
+    <color name="primary">#00F0FF</color>
+    <color name="secondary">#B026FF</color>
+    <color name="error">#FF0055</color>
+    
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    
+    <color name="google_btn_bg">#16202D</color>
+    <color name="google_btn_text">#FFFFFF</color>
+    <color name="google_btn_stroke">#39FF14</color>
+    
+    <color name="bg_light">#0A131F</color>
+    <color name="surface_light">#16202D</color>
+    <color name="on_primary">#000000</color>
+    <color name="on_secondary">#000000</color>
+</resources>
+""")

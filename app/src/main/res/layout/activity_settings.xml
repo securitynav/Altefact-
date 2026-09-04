@@ -100,6 +100,17 @@
             android:textColor="@color/error"
             android:layout_marginTop="16dp" />
             
+        
+        <Button
+            android:id="@+id/btnCheckUpdates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Actualizaciones (OTA)"
+            android:backgroundTint="@color/neon_cyan"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"

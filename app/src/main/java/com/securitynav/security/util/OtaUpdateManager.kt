@@ -8,6 +8,7 @@ import androidx.core.content.FileProvider
 import com.securitynav.security.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.delay
 import org.json.JSONObject
 import java.io.File
 import java.net.HttpURLConnection
@@ -29,6 +30,7 @@ class OtaUpdateManager(private val context: Context) {
     suspend fun checkForUpdates(): UpdateInfo = withContext(Dispatchers.IO) {
         try {
             val url = URL("$serverUrl?currentVersion=${context.packageManager.getPackageInfo(context.packageName, 0).versionCode}")
+            delay(1500) // Simular latencia de red
             val connection = (url.openConnection() as HttpURLConnection).apply {
                 requestMethod = "GET"
                 connectTimeout = 10000
