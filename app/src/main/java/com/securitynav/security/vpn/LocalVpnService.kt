@@ -109,18 +109,52 @@ class LocalVpnService : VpnService() {
                         val caps = cm.getNetworkCapabilities(activeNetwork)
                         val isValidated = caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true
                         
+
                         if (!isLoopback && isValidated) {
                             NetworkMonitor.recordInbound(read.toLong())
                             
-                            // Simulate security event analysis every ~50 packets
-                            packetCount++
-                            if (packetCount > 50) {
-                                packetCount = 0
-                                if (Random.nextFloat() < 0.3f) { // 30% chance per ~50 packets
-                                    simulateSecurityEvent()
+                            try {
+                                if (read >= 20 && (buffer[0].toInt() shr 4) == 4) { // IPv4
+                                    val ihl = buffer[0].toInt() and 0x0F
+                                    val ipHeaderLength = ihl * 4
+                                    val protocol = buffer[9].toInt() and 0xFF
+                                    
+                                    val srcIp = "${buffer[12].toInt() and 0xFF}.${buffer[13].toInt() and 0xFF}.${buffer[14].toInt() and 0xFF}.${buffer[15].toInt() and 0xFF}"
+                                    val destIp = "${buffer[16].toInt() and 0xFF}.${buffer[17].toInt() and 0xFF}.${buffer[18].toInt() and 0xFF}.${buffer[19].toInt() and 0xFF}"
+                                    
+                                    var srcPort = 0
+                                    var destPort = 0
+                                    var protoStr = "OTHER"
+                                    
+                                    if (protocol == 6 && read >= ipHeaderLength + 4) { // TCP
+                                        protoStr = "TCP"
+                                        srcPort = ((buffer[ipHeaderLength].toInt() and 0xFF) shl 8) or (buffer[ipHeaderLength + 1].toInt() and 0xFF)
+                                        destPort = ((buffer[ipHeaderLength + 2].toInt() and 0xFF) shl 8) or (buffer[ipHeaderLength + 3].toInt() and 0xFF)
+                                    } else if (protocol == 17 && read >= ipHeaderLength + 4) { // UDP
+                                        protoStr = "UDP"
+                                        srcPort = ((buffer[ipHeaderLength].toInt() and 0xFF) shl 8) or (buffer[ipHeaderLength + 1].toInt() and 0xFF)
+                                        destPort = ((buffer[ipHeaderLength + 2].toInt() and 0xFF) shl 8) or (buffer[ipHeaderLength + 3].toInt() and 0xFF)
+                                    }
+                                    
+                                    val isOutbound = srcIp == "10.0.0.2"
+                                    
+                                    com.securitynav.security.engine.PacketAnalyzer.addPacket(
+                                        com.securitynav.security.engine.RealTrafficLog(
+                                            isOutbound = isOutbound,
+                                            protocol = protoStr,
+                                            port = if (isOutbound) destPort else srcPort,
+                                            sourceIp = srcIp,
+                                            destinationIp = destIp,
+                                            payloadSize = read,
+                                            timestamp = System.currentTimeMillis()
+                                        )
+                                    )
                                 }
+                            } catch (e: Exception) {
+                                // Ignore parse errors
                             }
                         }
+
 
                         withContext(Dispatchers.IO) { 
                             output.write(buffer, 0, read) 
@@ -148,41 +182,7 @@ class LocalVpnService : VpnService() {
         }
     }
     
-    private fun simulateSecurityEvent() {
-        val isLeak = Random.nextBoolean()
-        val type = if (isLeak) "Data Leak Prevented!" else "Penetration Attempt!"
-        val desc = if (isLeak) "Blocked outgoing transmission of sensitive payload to unknown IP." else "Blocked incoming port scan from blacklisted IP."
-        
-        // Save to DB
-        val vectors = com.securitynav.security.engine.LeakVector.values()
-        val vector = vectors[kotlin.random.Random.nextInt(vectors.size)]
-        val sources = listOf("WhatsApp", "com.unknown.app", "Cell ID: 9942", "DNS: 8.8.4.4", "Accessibility Overlay")
-        val payloads = listOf("Contacts Dump", "Location Data", "Password Intercept", "Downgrade 4G->2G")
-        com.securitynav.security.engine.DataLeakDetector.triggerSimulatedLeak(vector, sources[kotlin.random.Random.nextInt(sources.size)], payloads[kotlin.random.Random.nextInt(payloads.size)])
-
-        dbHelper.insertEvent(DB_PASSPHRASE, type, desc)
-        
-        // Send Push Notification
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        
-        val intent = Intent(this, Class.forName("com.securitynav.security.ui.MainActivity"))
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, 
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        
-        val notif = NotificationCompat.Builder(this, "vpn_service_channel")
-            .setContentTitle("Security Alert")
-            .setContentText(type)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(desc))
-            .setSmallIcon(android.R.drawable.ic_dialog_alert)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .build()
-            
-        notificationManager.notify(Random.nextInt(100, 1000), notif)
-    }
+    
 
     private fun closeQuietly(resource: Any?) {
         try {

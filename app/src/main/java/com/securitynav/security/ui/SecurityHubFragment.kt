@@ -38,6 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+
+import com.securitynav.security.engine.PacketAnalyzer
+import com.securitynav.security.engine.RealTrafficLog
+
 import com.securitynav.security.billing.PaywallBottomSheet
 import com.securitynav.security.billing.SubscriptionManager
 import kotlinx.coroutines.delay
@@ -61,18 +65,6 @@ class SecurityHubFragment : Fragment() {
     }
 }
 
-data class TrafficLog(
-    val isOutbound: Boolean,
-    val protocol: String,
-    val port: Int,
-    val destination: String,
-    val appName: String,
-    val payloadSize: String,
-    val status: String,
-    val encryption: String,
-    val insights: String,
-    val timestamp: String
-)
 
 @Composable
 fun SecurityHubScreen() {
@@ -92,7 +84,7 @@ fun SecurityHubScreen() {
     var bandwidthText by remember { mutableStateOf("Calculando...") }
     
     // Simulate Traffic Logs
-    var trafficLogs by remember { mutableStateOf(listOf<TrafficLog>()) }
+    val trafficLogs by PacketAnalyzer.recentPackets.collectAsState(initial = emptyList())
 
     LaunchedEffect(Unit) {
         var lastRx = TrafficStats.getTotalRxBytes()
@@ -106,10 +98,7 @@ fun SecurityHubScreen() {
             lastRx = currentRx
             lastTx = currentTx
             
-            if (isMasterArmed && Math.random() > 0.6) {
-                val newLog = generateRandomTrafficLog()
-                trafficLogs = listOf(newLog) + trafficLogs.take(15)
-            }
+            
             
             delay(1000)
         }
@@ -228,33 +217,22 @@ fun SecurityHubScreen() {
     }
 }
 
-fun generateRandomTrafficLog(): TrafficLog {
-    val isOut = Math.random() > 0.5
-    val apps = listOf("WhatsApp", "Chrome", "Instagram", "App Desconocida", "Google Services")
-    val dests = listOf("104.16.24.34 (Cloudflare)", "54.239.28.85 (Amazon AWS)", "172.217.16.14 (Google)", "185.60.216.35 (Meta)")
-    val ports = listOf(443, 80, 53, 8080)
-    
-    val app = apps.random()
-    val isUnsafe = app == "App Desconocida"
-    
-    return TrafficLog(
-        isOutbound = isOut,
-        protocol = if (ports.random() == 443) "TCP" else "UDP",
-        port = ports.random(),
-        destination = dests.random(),
-        appName = app,
-        payloadSize = "${(10..1024).random()} KB",
-        status = if (isUnsafe) "SOSPECHOSO" else "SEGURO",
-        encryption = if (isUnsafe) "No Cifrado" else "TLS 1.3",
-        insights = if (isUnsafe) "Envío de metadatos a servidor desconocido en texto plano." else "Tráfico encriptado normal.",
-        timestamp = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
-    )
-}
+
+
 
 @Composable
-fun TrafficLogItem(log: TrafficLog) {
+fun TrafficLogItem(log: RealTrafficLog) {
     var expanded by remember { mutableStateOf(false) }
-    val color = if (log.status == "SEGURO") MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.error
+    
+    val df = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault())
+    val timestampStr = df.format(java.util.Date(log.timestamp))
+    
+    val targetIp = if (log.isOutbound) log.destinationIp else log.sourceIp
+    val isSecure = log.port == 443
+    val color = if (isSecure) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.error
+    val statusStr = if (isSecure) "SEGURO" else "ANALIZADO"
+    val encryption = if (isSecure) "TLS/HTTPS" else "No Cifrado/Desconocido"
+    val insights = "Paquete IP interceptado y analizado por DPI Local."
     
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -274,11 +252,11 @@ fun TrafficLogItem(log: TrafficLog) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(if (log.isOutbound) "⬆ SALIENTE" else "⬇ ENTRANTE", color = color, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(log.timestamp, color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.5f), fontSize = 10.sp)
+                        Text(timestampStr, color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.5f), fontSize = 10.sp)
                     }
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(log.appName, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    Text("${log.destination} : ${log.port}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f), fontSize = 12.sp)
+                    Text(targetIp, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text("Puerto: ${log.port}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f), fontSize = 12.sp)
                 }
                 Icon(
                     imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
@@ -294,15 +272,15 @@ fun TrafficLogItem(log: TrafficLog) {
                     
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         Text("Protocolo: ${log.protocol}", color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.7f), fontSize = 12.sp)
-                        Text("Cifrado: ${log.encryption}", color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.7f), fontSize = 12.sp)
+                        Text("Cifrado: ${encryption}", color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.7f), fontSize = 12.sp)
                     }
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("Tamaño: ${log.payloadSize}", color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.7f), fontSize = 12.sp)
-                        Text("Estado: ${log.status}", color = color, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text("Tamaño: ${log.payloadSize} B", color = MaterialTheme.colorScheme.onSurface.copy(alpha=0.7f), fontSize = 12.sp)
+                        Text("Estado: ${statusStr}", color = color, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text("Análisis DPI:", color = MaterialTheme.colorScheme.primary, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                    Text(log.insights, color = MaterialTheme.colorScheme.onSurface, fontSize = 12.sp)
+                    Text(insights, color = MaterialTheme.colorScheme.onSurface, fontSize = 12.sp)
                 }
             }
         }
