@@ -12,6 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import com.securitynav.security.util.OtaUpdateManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.switchmaterial.SwitchMaterial
+
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -24,6 +27,19 @@ class SettingsActivity : AppCompatActivity() {
         
         authManager = AuthManager(this)
         
+        
+        val switchTheme = findViewById<SwitchMaterial>(R.id.switchTheme)
+        val currentMode = AppCompatDelegate.getDefaultNightMode()
+        switchTheme.isChecked = currentMode == AppCompatDelegate.MODE_NIGHT_YES || currentMode == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
+        
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+
         val freqSpinner = findViewById<Spinner>(R.id.spinnerFrequency)
         val verbSpinner = findViewById<Spinner>(R.id.spinnerVerbosity)
         

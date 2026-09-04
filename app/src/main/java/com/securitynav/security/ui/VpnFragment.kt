@@ -80,14 +80,14 @@ class VpnFragment : Fragment() {
     private fun updateUI() {
         if (isVpnRunning) {
             tvStatus.text = "VPN Status: CONNECTED"
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#00FFC2")) // neon_cyan
+            tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), com.securitynav.security.R.color.primary)) // neon_cyan
             btnToggle.text = "Disconnect VPN"
-            btnToggle.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FF0055")) // neon_red
+            btnToggle.backgroundTintList = android.content.res.ColorStateList.valueOf(androidx.core.content.ContextCompat.getColor(requireContext(), com.securitynav.security.R.color.error)) // neon_red
         } else {
             tvStatus.text = "VPN Status: DISCONNECTED"
-            tvStatus.setTextColor(android.graphics.Color.parseColor("#B3B3B3")) // text_secondary
+            tvStatus.setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), com.securitynav.security.R.color.text_secondary)) // text_secondary
             btnToggle.text = "Connect VPN"
-            btnToggle.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#39FF14")) // neon_green
+            btnToggle.backgroundTintList = android.content.res.ColorStateList.valueOf(androidx.core.content.ContextCompat.getColor(requireContext(), com.securitynav.security.R.color.success)) // neon_green
         }
     }
 }

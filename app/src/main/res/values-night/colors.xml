@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DARK MODE COLORS (Cyberpunk / Hacker OLED) -->
+    <color name="primary">#00F0FF</color>
+    <color name="secondary">#B026FF</color>
+    <color name="background">#0A131F</color>
+    <color name="surface">#16202D</color>
+    
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8B9BB4</color>
+    
+    <color name="error">#FF0055</color>
+    <color name="success">#39FF14</color>
+    <color name="warning">#FFD700</color>
+    <color name="on_primary">#000000</color>
+    <color name="on_secondary">#000000</color>
+    <color name="google_btn_bg">#16202D</color>
+    <color name="google_btn_text">#FFFFFF</color>
+    <color name="google_btn_stroke">#39FF14</color>
+    <color name="bg_light">@color/background</color>
+    <color name="surface_light">@color/surface</color>
+</resources>
